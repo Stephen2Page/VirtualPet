@@ -9,7 +9,7 @@ namespace VirtualPet
     //Contains description of Pet
     class VirtualPet
     {
-        // Fields
+        // FIELDS
         private int hunger = 10;
         private int thirst = 10;
         private int waste = 10;
@@ -18,7 +18,7 @@ namespace VirtualPet
         private bool alive = true;
         private bool nirvana = false;
 
-        // Properties
+        // PROPERTIES
 
         // hunger -- increased by play and relieve, decreased by feed
 
@@ -28,35 +28,40 @@ namespace VirtualPet
 
         // bored -- increased by time, decreased with play
 
-        // Constuctors
+        // CONSTRUCTORS
 
-        // Methods
+        // METHODS
 
-        //Feed method -- decreases hunger, increases waste (and tired)
+        //Feed method -- decreases hunger, increases waste and boredom (and tired)
         static void Feed()
         {
-            //hunger+2
+            //hunger+3
             //waste--
+            //bored--
         }
 
         //Water method -- decreases thirst, increases waste
+        static void Water()
         {
             //thirst+2
             //waste--
         }
 
         //Play method -- decreases boredom, increases hunger and thirst (and tired)
+        static void Play()
         {
             //bored+3
             //hunger--
             //thirst--
         }
 
-        //Relieve method -- decreases waste, increases hunger
+        //Relieve method -- decreases waste, increases hunger and boredom
+        static void Relieve()
         {
             //waste+2
             //hunger--
-
+            //bored--
+        }
 
     }
 }
