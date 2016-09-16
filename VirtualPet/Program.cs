@@ -11,15 +11,17 @@ namespace VirtualPet
         //Contains program interface
         static void Main(string[] args)
         {
+            int action;
+
             //Display Health call hunger, thirst, waste, bored
 
-            //Display Activities -- create menu, process with Case statement
+            //Display Activities -- create menu, 
 
-            //Request input
+            //Request input -- 
 
-            //Evaluate input
+            //Evaluate input -- process with Case statement, call methods from VirtualPet
 
-            //if alive false DIE else repeat
+            //if alive false DIE else if nirvana WIN else repeat
         }
     }
 }

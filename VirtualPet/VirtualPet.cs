@@ -16,6 +16,7 @@ namespace VirtualPet
         private int bored = 10;
 
         private bool alive = true;
+        private bool nirvana = false;
 
         // Properties
 
@@ -32,12 +33,29 @@ namespace VirtualPet
         // Methods
 
         //Feed method -- decreases hunger, increases waste (and tired)
+        static void Feed()
+        {
+            //hunger+2
+            //waste--
+        }
 
         //Water method -- decreases thirst, increases waste
+        {
+            //thirst+2
+            //waste--
+        }
 
         //Play method -- decreases boredom, increases hunger and thirst (and tired)
+        {
+            //bored+3
+            //hunger--
+            //thirst--
+        }
 
         //Relieve method -- decreases waste, increases hunger
+        {
+            //waste+2
+            //hunger--
 
 
     }
