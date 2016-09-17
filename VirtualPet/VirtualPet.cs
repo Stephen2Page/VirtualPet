@@ -49,8 +49,21 @@ namespace VirtualPet
             set { this.bored = value; }
         }
 
+        public bool Alive
+        {
+            get { return this.alive; }
+            set { this.alive = value; }
+        }
+
 
         // CONSTRUCTORS
+
+        // create new pet
+        public VirtualPet()
+        {
+
+        }
+
 
         // METHODS
 
@@ -80,17 +93,18 @@ namespace VirtualPet
         //}
 
         //Health Report
-        public string HealthReport()
+        public string HealthStatus()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append("  ");
             sb.Append(Hunger);
-            sb.Append("\t");
+            sb.Append("\t  ");
             sb.Append(Thirst);
-            sb.Append("\t");
+            sb.Append("\t  ");
             sb.Append(Waste);
-            sb.Append("\t");
+            sb.Append("\t  ");
             sb.Append(Bored);
-            sb.Append("\t");
+            sb.Append("\t  ");
 
             return sb.ToString();
         }
@@ -98,24 +112,25 @@ namespace VirtualPet
         //Feed method -- decreases hunger, increases waste and boredom (and tired)
         public void Feed()
         {
-            Hunger += 3; 
-            waste--;
-            bored--;
-        }
+            Hunger += 3;
+            Waste--;
+            Bored--;
 
+        }
+   
         //Water method -- decreases thirst, increases waste
         public void Water()
         {
-            thirst += 2;
-            waste--;
+            Thirst += 2;
+            Waste--;
         }
 
         //Play method -- decreases boredom, increases hunger and thirst (and tired)
         public void Play()
         {
-            bored += 3;
-            hunger--;
-            thirst--;
+            Bored += 3;
+            Hunger--;
+            Thirst--;
         }
 
         //Relieve method -- decreases waste, increases hunger and boredom
@@ -124,6 +139,11 @@ namespace VirtualPet
             waste += 2;
             hunger--;
             bored--;
+        }
+        //To Bored
+        public void Boredom()
+        {
+            Bored++;
         }
 
     }
