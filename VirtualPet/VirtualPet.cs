@@ -10,10 +10,13 @@ namespace VirtualPet
     class VirtualPet
     {
         // FIELDS
-        private int hunger = 10;
-        private int thirst = 10;
-        private int waste = 10;
-        private int bored = 10;
+        private static int death = 20;
+        private static int startHealth = 10;
+
+        private int hunger = startHealth;
+        private int thirst = startHealth;
+        private int waste = startHealth;
+        private int bored = startHealth;
 
         private bool alive = true;
         private bool nirvana = false;
@@ -108,7 +111,29 @@ namespace VirtualPet
 
             return sb.ToString();
         }
-
+        public void Tick(int choice)
+        {
+            switch (choice)
+            {
+                case 1:
+                    Feed(); //call feed
+                    break;
+                case 2:
+                    Water();
+                    break;
+                case 3:
+                    Relieve();
+                    break;
+                case 4:
+                    Play();
+                    break;
+                default: // invalid answer
+                    Boredom();     //increment boredom due to invalid response
+                    Console.WriteLine("I'm getting bored.");
+                    Console.ReadKey();
+                    break;
+            }
+        }
         //Feed method -- decreases hunger, increases waste and boredom (and tired)
         public void Feed()
         {
@@ -140,10 +165,43 @@ namespace VirtualPet
             hunger--;
             bored--;
         }
-        //To Bored
+        //Too Bored
         public void Boredom()
         {
             Bored++;
+        }
+
+        //Still Alive?
+        public bool Health()
+        {
+            if (Hunger >= death || Thirst >= death || Waste >= death || Bored >= death)
+            {
+                Alive = false;
+                return false;
+            }
+            else
+                return true;
+        }
+        public string CauseOfDeath()
+        { 
+            string cause;
+            if (Hunger >= death)
+            {
+                cause = "starvation";
+            }
+            else if (Thirst >= death)
+            {
+                cause = "dehydration";
+            }
+            else if (Waste >= death)
+            {
+                cause = "constipation";
+            }
+            else if (Bored >= death)
+            {
+                cause = "boredom";
+            }
+            return cause;
         }
 
     }

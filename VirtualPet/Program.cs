@@ -13,12 +13,13 @@ namespace VirtualPet
         {
             VirtualPet hedgeHog = new VirtualPet();
             int action;  //user choice of action to perform
-            //string healthStatus;
+            Console.WriteLine("Take care of your pet. If any health item reaches 20 it will die.");
 
-            //while (hedgeHog.Alive)
+            while (hedgeHog.Alive)
             {
                 //Display Health call hunger, thirst, waste, bored
                 HealthReport(hedgeHog.HealthStatus());
+                //FOLLOWING LINES SHOULD BE ABLE TO GO AWAY ONCE LOOPING WORKS
                 //Console.WriteLine("Your pet's health looks like this");
                 //Console.WriteLine("Hunger\tThirst\tWaste\tBoredom");
                 //Console.WriteLine(" ---- \t ---- \t ---- \t ----- ");
@@ -33,28 +34,11 @@ namespace VirtualPet
 
                 //Evaluate input -- process with Case statement, call methods from VirtualPet
                 //NEED check for valid entry
-                switch (action)
-                {
-                    case 1:
-                        hedgeHog.Feed(); //call feed
-                        break;
-                    case 2:
-                        hedgeHog.Water();
-                        break;
-                    case 3:
-                        hedgeHog.Relieve();
-                        break;
-                    case 4:
-                        hedgeHog.Play();
-                        break;
-                    default: // invalid answer
-                        hedgeHog.Boredom();     //increment boredom due to invalid response
-                        Console.WriteLine("Please select from menu above.");
-                        action = int.Parse(Console.ReadLine());
-                        break;
-                }
-
+                hedgeHog.Tick(action);
+                        
             }
+            Console.WriteLine("Your pet has succomb to " + ); //Cause of death
+            //if alive false DIE else if nirvana WIN else repeat
         }
 
 
@@ -67,8 +51,6 @@ namespace VirtualPet
             Console.WriteLine();
         }
 
-        //call property?? to evaluate overall health
-        //if alive false DIE else if nirvana WIN else repeat
         static void ActivityMenu()
         {
             Console.WriteLine("1\tFeed");
@@ -77,6 +59,7 @@ namespace VirtualPet
             Console.WriteLine("4\tPlay");
             Console.WriteLine();
         }
+        
     }
     
 }
