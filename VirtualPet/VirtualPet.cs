@@ -10,7 +10,7 @@ namespace VirtualPet
     class VirtualPet
     {
         // FIELDS
-        private static int death = 20;
+        private static int death = 0;
         private static int startHealth = 10;
 
         private int hunger = startHealth;
@@ -133,6 +133,7 @@ namespace VirtualPet
                     Console.ReadKey();
                     break;
             }
+            Health();
         }
         //Feed method -- decreases hunger, increases waste and boredom (and tired)
         public void Feed()
@@ -200,6 +201,10 @@ namespace VirtualPet
             else if (Bored >= death)
             {
                 cause = "boredom";
+            }
+            else
+            {
+                cause = "";
             }
             return cause;
         }

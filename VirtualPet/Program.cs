@@ -37,8 +37,10 @@ namespace VirtualPet
                 hedgeHog.Tick(action);
                         
             }
-            Console.WriteLine("Your pet has succomb to " + ); //Cause of death
-            //if alive false DIE else if nirvana WIN else repeat
+            if (hedgeHog.Alive == false) //if alive false DIE else if nirvana WIN else repeat
+            {
+                Console.WriteLine("Your pet has succomb to " + hedgeHog.CauseOfDeath()); //Cause of death
+            }
         }
 
 
