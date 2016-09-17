@@ -12,8 +12,13 @@ namespace VirtualPet
         static void Main(string[] args)
         {
             int action;  //user choice of action to perform
+            string healthReport;
 
             //Display Health call hunger, thirst, waste, bored
+            Console.WriteLine("Your pet's health looks like this");
+            Console.WriteLine("Hunger\tThirst\tWaste\tBoredom");
+            Console.WriteLine(" ---- \t ---- \t --- \t ----- ");
+            Console.WriteLine(Hunger(); //use stringbuilder??
 
             //Display Activities -- create menu, 
             Console.WriteLine("1\tFeed");
@@ -27,8 +32,8 @@ namespace VirtualPet
 
             //Evaluate input -- process with Case statement, call methods from VirtualPet
             //NEED check for valid entry
-            switch(action)
-                {
+            switch (action)
+            {
                 case 1:
                     //call feed
                     break;
@@ -41,8 +46,13 @@ namespace VirtualPet
                 case 4:
                     //call play
                     break;
-                }
-
+                default: // invalid answer
+                    //increment boredom
+                    Console.WriteLine("Please select from menu above.");
+                    action = int.Parse(Console.ReadLine());
+                    break;
+            }
+            //call property?? to evaluate overall health
             //if alive false DIE else if nirvana WIN else repeat
             }
     }
