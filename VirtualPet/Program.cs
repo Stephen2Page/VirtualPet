@@ -13,18 +13,14 @@ namespace VirtualPet
         {
             VirtualPet hedgeHog = new VirtualPet();
             int action;  //user choice of action to perform
-            Console.WriteLine("Take care of your pet. If any health item reaches 20 it will die.");
+            Console.WriteLine("Take care of your pet. If any health item reaches zero it will die.");
+            Console.WriteLine();
 
             while (hedgeHog.Alive)
             {
                 //Display Health call hunger, thirst, waste, bored
                 HealthReport(hedgeHog.HealthStatus());
-                //FOLLOWING LINES SHOULD BE ABLE TO GO AWAY ONCE LOOPING WORKS
-                //Console.WriteLine("Your pet's health looks like this");
-                //Console.WriteLine("Hunger\tThirst\tWaste\tBoredom");
-                //Console.WriteLine(" ---- \t ---- \t ---- \t ----- ");
-                //Console.WriteLine(hedgeHog.HealthStatus());                //displays current health
-
+ 
                 //Display Activities -- create menu,
                 ActivityMenu();
 
@@ -47,6 +43,7 @@ namespace VirtualPet
         static void HealthReport(string healthStatus)
         {
             Console.WriteLine("Your pet's health looks like this");
+            Console.WriteLine();
             Console.WriteLine("Hunger\tThirst\tWaste\tBoredom");
             Console.WriteLine(" ---- \t ---- \t ---- \t ----- ");
             Console.WriteLine(healthStatus); //displays current health

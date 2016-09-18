@@ -113,26 +113,34 @@ namespace VirtualPet
         }
         public void Tick(int choice)
         {
+            Console.Clear();  //clears screen
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine();
+
             switch (choice)
             {
                 case 1:
                     Feed(); //call feed
+                    Console.WriteLine("Yummy.");
                     break;
                 case 2:
                     Water();
+                    Console.WriteLine("Slurp.");
                     break;
                 case 3:
                     Relieve();
+                    Console.WriteLine("Ah.");
                     break;
                 case 4:
                     Play();
+                    Console.WriteLine("That was fun.");
                     break;
                 default: // invalid answer
                     Boredom();     //increment boredom due to invalid response
                     Console.WriteLine("I'm getting bored.");
-                    Console.ReadKey();
                     break;
             }
+            Console.WriteLine();
             Health();
         }
         //Feed method -- decreases hunger, increases waste and boredom (and tired)
@@ -169,13 +177,13 @@ namespace VirtualPet
         //Too Bored
         public void Boredom()
         {
-            Bored++;
+            Bored--;
         }
 
         //Still Alive?
         public bool Health()
         {
-            if (Hunger >= death || Thirst >= death || Waste >= death || Bored >= death)
+            if (Hunger <= death || Thirst <= death || Waste <= death || Bored <= death)
             {
                 Alive = false;
                 return false;
@@ -186,19 +194,19 @@ namespace VirtualPet
         public string CauseOfDeath()
         { 
             string cause;
-            if (Hunger >= death)
+            if (Hunger <= death)
             {
                 cause = "starvation";
             }
-            else if (Thirst >= death)
+            else if (Thirst <= death)
             {
                 cause = "dehydration";
             }
-            else if (Waste >= death)
+            else if (Waste <= death)
             {
                 cause = "constipation";
             }
-            else if (Bored >= death)
+            else if (Bored <= death)
             {
                 cause = "boredom";
             }
