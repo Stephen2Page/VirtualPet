@@ -16,11 +16,11 @@ namespace VirtualPet
             Console.WriteLine("Take care of your pet. If any health item reaches zero it will die.");
             Console.WriteLine();
 
-            while (hedgeHog.Alive)
+            while (hedgeHog.Alive >= 0)
             {
                 //Display Health call hunger, thirst, waste, bored
-                HealthReport(hedgeHog.HealthStatus());
- 
+                HealthReport(hedgeHog.HealthStatus(), hedgeHog.Alive);
+
                 //Display Activities -- create menu,
                 ActivityMenu();
 
@@ -31,22 +31,32 @@ namespace VirtualPet
                 //Evaluate input -- process with Case statement, call methods from VirtualPet
                 //NEED check for valid entry
                 hedgeHog.Tick(action);
-                        
-            }
-            if (hedgeHog.Alive == false) //if alive false DIE else if nirvana WIN else repeat
-            {
-                Console.WriteLine("Your pet has succomb to " + hedgeHog.CauseOfDeath()); //Cause of death
+
+
+                Console.WriteLine(hedgeHog.Alive); // DEBUG
+
+                if (hedgeHog.Alive == 0) //if alive false DIE
+                {
+                    Console.WriteLine("Your pet has succomb to " + hedgeHog.CauseOfDeath()); //Cause of death
+                    Console.ReadKey();
+                    break;
+                }
             }
         }
 
 
-        static void HealthReport(string healthStatus)
+        static void HealthReport(string healthStatus, int alive)
         {
             Console.WriteLine("Your pet's health looks like this");
             Console.WriteLine();
             Console.WriteLine("Hunger\tThirst\tWaste\tBoredom");
             Console.WriteLine(" ---- \t ---- \t ---- \t ----- ");
+            if (alive <= 4)
+            {
+                Console.ForegroundColor = (ConsoleColor.Red); 
+            }
             Console.WriteLine(healthStatus); //displays current health
+            Console.ForegroundColor = (ConsoleColor.Gray);
             Console.WriteLine();
         }
 

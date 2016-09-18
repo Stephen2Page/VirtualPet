@@ -10,16 +10,16 @@ namespace VirtualPet
     class VirtualPet
     {
         // FIELDS
-        private static int death = 0;
         private static int startHealth = 10;
+        private static int poor = 4;
+        private static int death = 0;
 
         private int hunger = startHealth;
         private int thirst = startHealth;
         private int waste = startHealth;
         private int bored = startHealth;
 
-        private bool alive = true;
-        private bool nirvana = false;
+        private int alive = startHealth;
 
         // PROPERTIES
 
@@ -52,7 +52,7 @@ namespace VirtualPet
             set { this.bored = value; }
         }
 
-        public bool Alive
+        public int Alive
         {
             get { return this.alive; }
             set { this.alive = value; }
@@ -70,30 +70,7 @@ namespace VirtualPet
 
         // METHODS
 
-        // executes with user input or time
-        //public void Tick()
-        //{
-        //    switch (action)
-        //    {
-        //        case 1:
-        //            //call feed
-        //            break;
-        //        case 2:
-        //            //call water
-        //            break;
-        //        case 3:
-        //            //call relieve
-        //            break;
-        //        case 4:
-        //            //call play
-        //            break;
-        //        default: // invalid answer
-        //            //increment boredom
-        //            Console.WriteLine("Please select from menu above.");
-        //            action = int.Parse(Console.ReadLine());
-        //            break;
-        //    }
-        //}
+      
 
         //Health Report
         public string HealthStatus()
@@ -111,6 +88,8 @@ namespace VirtualPet
 
             return sb.ToString();
         }
+
+        // Executes with user input
         public void Tick(int choice)
         {
             Console.Clear();  //clears screen
@@ -141,7 +120,7 @@ namespace VirtualPet
                     break;
             }
             Console.WriteLine();
-            Health();
+            HealthCheck();
         }
         //Feed method -- decreases hunger, increases waste and boredom (and tired)
         public void Feed()
@@ -181,15 +160,22 @@ namespace VirtualPet
         }
 
         //Still Alive?
-        public bool Health()
+        public int HealthCheck()
         {
-            if (Hunger <= death || Thirst <= death || Waste <= death || Bored <= death)
+            if (Hunger <= death || Thirst <= death || Waste <= death || Bored <= death) 
             {
-                Alive = false;
-                return false;
+                Alive = death;
+                return Alive;
+            }
+            else if (Hunger <= poor || Thirst <= poor || Waste <= poor || Bored <= poor)
+            {
+                Alive = poor;
+                return Alive;
             }
             else
-                return true;
+            {
+                return Alive;  // unchanged
+            }
         }
         public string CauseOfDeath()
         { 
