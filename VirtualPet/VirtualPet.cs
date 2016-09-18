@@ -12,6 +12,7 @@ namespace VirtualPet
         // FIELDS
         private static int startHealth = 10;
         private static int poor = 4;
+        private static int overdone = 20;
         private static int death = 0;
 
         private int hunger = startHealth;
@@ -20,6 +21,10 @@ namespace VirtualPet
         private int bored = startHealth;
 
         private int alive = startHealth;
+
+        private int choice;        //tracts last three choices
+        private int choice1;
+        private int choice2;
 
         // PROPERTIES
 
@@ -56,6 +61,22 @@ namespace VirtualPet
         {
             get { return this.alive; }
             set { this.alive = value; }
+        }
+
+        public int Choice
+        {
+            get { return this.choice; }
+            set { this.choice = value; }
+        }
+        public int Choice1
+        {
+            get { return this.choice1; }
+            set { this.choice1 = value; }
+        }
+        public int Choice2
+        {
+            get { return this.choice2; }
+            set { this.choice2 = value; }
         }
 
 
@@ -95,27 +116,28 @@ namespace VirtualPet
             Console.Clear();  //clears screen
             Console.SetCursorPosition(0, 0);
             Console.WriteLine();
+            bool repeat = RepeatingActivity(choice, Choice1, Choice2);
 
             switch (choice)
             {
                 case 1:
-                    Feed(); //call feed
+                    Feed(repeat); //call feed
                     Console.WriteLine("Yummy.");
                     break;
                 case 2:
-                    Water();
+                    Water(repeat);
                     Console.WriteLine("Slurp.");
                     break;
                 case 3:
-                    Relieve();
+                    Relieve(repeat);
                     Console.WriteLine("Ah.");
                     break;
                 case 4:
-                    Play();
+                    Play(repeat);
                     Console.WriteLine("That was fun.");
                     break;
                 default: // invalid answer
-                    Boredom();     //increment boredom due to invalid response
+                    Boredom(repeat);     //increment boredom due to invalid response
                     Console.WriteLine("I'm getting bored.");
                     break;
             }
@@ -123,42 +145,99 @@ namespace VirtualPet
             HealthCheck();
         }
         //Feed method -- decreases hunger, increases waste and boredom (and tired)
-        public void Feed()
+        public void Feed(bool repeating)
         {
-            Hunger += 3;
-            Waste--;
-            Bored--;
-
+            if (repeating)
+            {
+                Waste -= 2;
+                Bored -= 2;
+            }
+            else
+            {
+                Hunger += 3;
+                Waste--;
+                Bored--;
+            }
         }
-   
+
         //Water method -- decreases thirst, increases waste
-        public void Water()
+        public void Water(bool repeating)
         {
-            Thirst += 2;
-            Waste--;
+            if (repeating)
+            {
+                Waste -= 2;
+                Bored--;
+            }
+            else
+            {
+                Thirst += 2;
+                Waste--;
+            }
         }
-
         //Play method -- decreases boredom, increases hunger and thirst (and tired)
-        public void Play()
+        public void Play(bool repeating)
         {
-            Bored += 3;
-            Hunger--;
-            Thirst--;
+            if (repeating)
+            {
+                Bored--;
+                Hunger -= 2;
+                Thirst -= 2;
+                Waste--;
+            }
+            else
+            {
+                Bored += 3;
+                Hunger--;
+                Thirst--;
+                Waste--;
+            }
         }
 
         //Relieve method -- decreases waste, increases hunger and boredom
-        public void Relieve()
+        public void Relieve(bool repeating)
         {
-            waste += 2;
-            hunger--;
-            bored--;
+            if (repeating)
+            {
+                Bored -= 3;
+            }
+            else
+            {
+                Waste += 2;
+                Hunger--;
+                Bored--;
+            }
         }
         //Too Bored
-        public void Boredom()
+        public void Boredom(bool repeating)
         {
-            Bored--;
+            if (repeating)
+            {
+                Bored--;
+                Thirst--;
+                Hunger--;
+                Waste--;
+
+            }
+            else
+            {
+                Bored--;
+            }
         }
 
+        public bool RepeatingActivity(int choice, int choice1, int choice2)
+        {
+            //if same activity three times no benefit but still decreases.
+            if (choice == choice1 && choice == choice2)
+            {
+                return true;
+            }
+            else
+            {
+                this.choice2 = choice1;
+                this.choice1 = choice;
+                return false;
+            }
+        }
         //Still Alive?
         public int HealthCheck()
         {
@@ -174,6 +253,7 @@ namespace VirtualPet
             }
             else
             {
+                Alive = startHealth;
                 return Alive;  // unchanged
             }
         }

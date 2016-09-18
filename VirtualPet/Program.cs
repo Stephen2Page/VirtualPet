@@ -33,7 +33,6 @@ namespace VirtualPet
                 hedgeHog.Tick(action);
 
 
-                Console.WriteLine(hedgeHog.Alive); // DEBUG
 
                 if (hedgeHog.Alive == 0) //if alive false DIE
                 {
