@@ -7,3 +7,6 @@ Also overdoing them may have unintended consequences.
 
 If any health items get too low they will highlight. If your pet dies you will be given a cause of death.
 
+Main Program contains the basic user interface providing the menu and status reports.
+class VirtualPet handles interpreting the input and updating the health status along with reporting back to Main program.
+
